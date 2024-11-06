@@ -1,6 +1,7 @@
 #ifndef MCAP_TESTER_HPP
 #define MCAP_TESTER_HPP
 
+#include <array>
 #include <cmath>
 #include <iostream>
 #include <stdexcept>
@@ -46,6 +47,23 @@ public:
     }
   }
 
+  template <std::size_t N>
+  void expect_near(const std::array<T, N> &actual,
+                   const std::array<T, N> &expected, T tolerance,
+                   const std::string &message) {
+    for (std::size_t i = 0; i < N; ++i) {
+      if (std::abs(actual[i] - expected[i]) <= tolerance) {
+        /* Do Nothing. */
+      } else {
+        std::cout << "FAILURE: " << message << " Element mismatch."
+                  << std::endl;
+        std::cout << std::endl;
+        test_failed_flag = true;
+        return;
+      }
+    }
+  }
+
   void expect_near(std::vector<std::vector<T>> actual,
                    std::vector<std::vector<T>> expected, T tolerance,
                    const std::string &message) {
@@ -65,6 +83,25 @@ public:
       }
 
       for (size_t j = 0; j < actual[i].size(); j++) {
+        if (std::abs(actual[i][j] - expected[i][j]) <= tolerance) {
+          /* Do Nothing. */
+        } else {
+          std::cout << "FAILURE: " << message << " Element mismatch."
+                    << std::endl;
+          std::cout << std::endl;
+          test_failed_flag = true;
+          return;
+        }
+      }
+    }
+  }
+
+  template <std::size_t M, std::size_t N>
+  void expect_near(const std::array<std::array<T, N>, M> &actual,
+                   const std::array<std::array<T, N>, M> &expected, T tolerance,
+                   const std::string &message) {
+    for (std::size_t i = 0; i < M; ++i) {
+      for (std::size_t j = 0; j < N; ++j) {
         if (std::abs(actual[i][j] - expected[i][j]) <= tolerance) {
           /* Do Nothing. */
         } else {
