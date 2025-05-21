@@ -12,7 +12,7 @@ namespace Tester {
 
 template <typename T> class MCAPTester {
 public:
-  MCAPTester() : test_failed_flag(false) {}
+  MCAPTester() : _test_failed_flag(false) {}
 
   void expect_near(T actual, T expected, T tolerance,
                    const std::string &message) {
@@ -21,7 +21,7 @@ public:
     } else {
       std::cout << "FAILURE: " << message << std::endl;
       std::cout << std::endl;
-      test_failed_flag = true;
+      this->_test_failed_flag = true;
     }
   }
 
@@ -30,7 +30,7 @@ public:
     if (actual.size() != expected.size()) {
       std::cout << "FAILURE: " << message << " Size mismatch." << std::endl;
       std::cout << std::endl;
-      test_failed_flag = true;
+      this->_test_failed_flag = true;
       return;
     }
 
@@ -41,7 +41,7 @@ public:
         std::cout << "FAILURE: " << message << " Element mismatch."
                   << std::endl;
         std::cout << std::endl;
-        test_failed_flag = true;
+        this->_test_failed_flag = true;
         return;
       }
     }
@@ -58,7 +58,7 @@ public:
         std::cout << "FAILURE: " << message << " Element mismatch."
                   << std::endl;
         std::cout << std::endl;
-        test_failed_flag = true;
+        this->_test_failed_flag = true;
         return;
       }
     }
@@ -70,7 +70,7 @@ public:
     if (actual.size() != expected.size()) {
       std::cout << "FAILURE: " << message << " Size mismatch." << std::endl;
       std::cout << std::endl;
-      test_failed_flag = true;
+      this->_test_failed_flag = true;
       return;
     }
 
@@ -78,7 +78,7 @@ public:
       if (actual[i].size() != expected[i].size()) {
         std::cout << "FAILURE: " << message << " Size mismatch. " << std::endl;
         std::cout << std::endl;
-        test_failed_flag = true;
+        this->_test_failed_flag = true;
         return;
       }
 
@@ -89,7 +89,7 @@ public:
           std::cout << "FAILURE: " << message << " Element mismatch."
                     << std::endl;
           std::cout << std::endl;
-          test_failed_flag = true;
+          this->_test_failed_flag = true;
           return;
         }
       }
@@ -108,7 +108,7 @@ public:
           std::cout << "FAILURE: " << message << " Element mismatch."
                     << std::endl;
           std::cout << std::endl;
-          test_failed_flag = true;
+          this->_test_failed_flag = true;
           return;
         }
       }
@@ -116,15 +116,15 @@ public:
   }
 
   void throw_error_if_test_failed() {
-    if (test_failed_flag) {
+    if (this->_test_failed_flag) {
       throw std::runtime_error("Test failed.");
     }
   }
 
-  void reset_test_failed_flag() { test_failed_flag = false; }
+  void reset_test_failed_flag() { this->_test_failed_flag = false; }
 
-private:
-  bool test_failed_flag = false;
+protected:
+  bool this->_test_failed_flag = false;
 };
 
 } // namespace Tester
