@@ -124,7 +124,7 @@ public:
   void reset_test_failed_flag() { this->_test_failed_flag = false; }
 
 protected:
-  bool this->_test_failed_flag = false;
+  bool _test_failed_flag = false;
 };
 
 } // namespace Tester
