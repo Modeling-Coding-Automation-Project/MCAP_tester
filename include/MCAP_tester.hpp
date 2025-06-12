@@ -25,8 +25,8 @@ public:
     }
   }
 
-  void expect_near(std::vector<T> actual, std::vector<T> expected, T tolerance,
-                   const std::string &message) {
+  void expect_near(const std::vector<T> actual, const std::vector<T> expected,
+                   T tolerance, const std::string &message) {
     if (actual.size() != expected.size()) {
       std::cout << "FAILURE: " << message << " Size mismatch." << std::endl;
       std::cout << std::endl;
@@ -64,8 +64,8 @@ public:
     }
   }
 
-  void expect_near(std::vector<std::vector<T>> actual,
-                   std::vector<std::vector<T>> expected, T tolerance,
+  void expect_near(const std::vector<std::vector<T>> actual,
+                   const std::vector<std::vector<T>> expected, T tolerance,
                    const std::string &message) {
     if (actual.size() != expected.size()) {
       std::cout << "FAILURE: " << message << " Size mismatch." << std::endl;
