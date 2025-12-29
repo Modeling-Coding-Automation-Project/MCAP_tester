@@ -8,7 +8,6 @@
  *         A utility struct for performing assertions on numerical values and ndarray arrays, supporting both scalar and 2D array comparisons with tolerance.
  *         It provides methods to check for near-equality, handle test failure reporting, and manage the test failure state.
  */
-
 use ndarray::{Array2, ArrayView2};
 
 pub struct MCAPTester {
@@ -40,7 +39,13 @@ impl MCAPTester {
      * - Checks if the absolute difference is within tolerance.
      * - On failure, prints the provided message and sets self.test_failed_flag to true.
      */
-    pub fn expect_near_scalar(&mut self, actual: f64, expected: f64, tolerance: f64, message: &str) {
+    pub fn expect_near_scalar(
+        &mut self,
+        actual: f64,
+        expected: f64,
+        tolerance: f64,
+        message: &str,
+    ) {
         if (actual - expected).abs() <= tolerance {
             // Do nothing
         } else {
@@ -65,7 +70,13 @@ impl MCAPTester {
      * - Checks if shapes match and all elements are within tolerance.
      * - On failure, prints the provided message and sets self.test_failed_flag to true.
      */
-    pub fn expect_near(&mut self, actual: ArrayView2<f64>, expected: ArrayView2<f64>, tolerance: f64, message: &str) {
+    pub fn expect_near(
+        &mut self,
+        actual: ArrayView2<f64>,
+        expected: ArrayView2<f64>,
+        tolerance: f64,
+        message: &str,
+    ) {
         if actual.shape() != expected.shape() {
             println!("FAILURE: {} Shape mismatch.", message);
             println!();
@@ -103,7 +114,13 @@ impl MCAPTester {
      * - Prints a failure message and sets `self.test_failed_flag` to true if arrays differ in shape or any element exceeds the tolerance.
      * - Returns immediately upon the first failure detected.
      */
-    pub fn expect_near_2d(&mut self, actual: ArrayView2<f64>, expected: ArrayView2<f64>, tolerance: f64, message: &str) {
+    pub fn expect_near_2d(
+        &mut self,
+        actual: ArrayView2<f64>,
+        expected: ArrayView2<f64>,
+        tolerance: f64,
+        message: &str,
+    ) {
         if actual.shape() != expected.shape() {
             println!("FAILURE: {} Shape mismatch.", message);
             println!();
