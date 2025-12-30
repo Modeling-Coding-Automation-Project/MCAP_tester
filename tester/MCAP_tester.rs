@@ -78,7 +78,7 @@ impl MCAPTester {
 
         let mut all_close = true;
         for (a, e) in actual.iter().zip(expected.iter()) {
-            if (a - e).abs() > tolerance {
+            if (*a - *e).abs() > tolerance {
                 all_close = false;
                 break;
             }
