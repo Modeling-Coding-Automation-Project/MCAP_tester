@@ -77,6 +77,9 @@
         "editor.defaultFormatter": "ms-python.autopep8",
         "editor.formatOnSave": true
     },
+    "[rust]": {
+            "editor.defaultFormatter": "rust-lang.rust-analyzer",
+    },
     "autopep8.args": [
         "--ignore",
         "E402"
